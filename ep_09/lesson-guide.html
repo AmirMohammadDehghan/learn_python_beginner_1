@@ -1,0 +1,244 @@
+<!doctype html><html lang="fa" dir="rtl"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>جلسه 9: Dictionary</title>
+<style>body{font:19px/1.9 Tahoma,sans-serif;max-width:1000px;margin:40px auto;padding:0 24px;background:#faf9ef;color:#27291d}h1,h2{color:#746900}h2{border-bottom:2px solid #c5b943;padding-bottom:12px;margin-top:60px}h3{margin-top:38px}pre{direction:ltr;text-align:left;unicode-bidi:embed;white-space:pre-wrap;overflow-wrap:anywhere;background:#161b22;color:#f1f3e7;padding:22px;border-radius:8px;font:17px/1.7 Consolas,monospace}code{direction:ltr;unicode-bidi:embed}li{margin:10px 0}details{border-inline-start:3px solid #b9aa30;padding:10px 20px;margin:20px 0}a{color:#546315}@media print{body{background:white;max-width:none}h2{break-before:page}pre,details{break-inside:avoid}}</style>
+<h1>جلسهٔ 9: Dictionary</h1><p>داده‌های کلید و مقدار</p>
+<p>پایتون مقدماتی ۱، کدچ</p><nav><ol>
+<li><a href="#section-1">عنوان جلسه</a></li>
+<li><a href="#section-2">اهداف یادگیری</a></li>
+<li><a href="#section-3">مرور جلسه قبل</a></li>
+<li><a href="#section-4">آموزش مبحث اول</a></li>
+<li><a href="#section-5">مثال مبحث اول</a></li>
+<li><a href="#section-6">آموزش مبحث دوم</a></li>
+<li><a href="#section-7">مثال مبحث دوم</a></li>
+<li><a href="#section-8">نکات مهم</a></li>
+<li><a href="#section-9">خطاهای رایج</a></li>
+<li><a href="#section-10">تمرین کلاسی</a></li>
+<li><a href="#section-11">کوییز کوتاه</a></li>
+<li><a href="#section-12">تمرین منزل</a></li>
+<li><a href="#section-13">جمع‌بندی</a></li>
+</ol></nav>
+<h2 id="section-1">1. عنوان جلسه</h2>
+<h3>Dictionary</h3><ul>
+<li>جلسهٔ نهم</li>
+<li>پایتون مقدماتی ۱</li>
+</ul>
+<h2 id="section-2">2. اهداف یادگیری</h2>
+<h3>اهداف یادگیری</h3><ul>
+<li>ساخت دیکشنری و انتخاب کلید مناسب برای هر داده</li>
+<li>خواندن، تغییر، افزودن و حذف اعضا بدون خطای قابل پیشگیری</li>
+<li>پیمایش و کپی داده‌ها و ساخت چند رکورد مرتبط</li>
+</ul>
+<p>در پایان، هنرجو باید بتواند موجودی یک فروشگاه را با Dictionary مدیریت کند و تفاوت کلید، مقدار و اندیس را توضیح دهد.</p>
+<h2 id="section-3">3. مرور جلسه قبل</h2>
+<h3>مرور Tuple و Set</h3><ul>
+<li>Tuple ترتیب دارد و اعضای آن مستقیماً تغییر نمی‌کنند.</li>
+<li>Set برای اعضای یکتا و بررسی عضویت مناسب است.</li>
+<li>برای اتصال نام کالا به موجودی آن، به رابطهٔ کلید و مقدار نیاز داریم.</li>
+</ul>
+<p>پرسش شروع: چرا یک Set برای نگهداری نام دانشجو همراه با نمرهٔ او کافی نیست؟ پاسخ: Set این رابطهٔ نام‌دار را نمایش نمی‌دهد. Dictionary نام یا شناسه را به مقدار مرتبط می‌کند.</p>
+<h2 id="section-4">4. آموزش مبحث اول</h2>
+<h3>ساختار Dictionary</h3><ul>
+<li>هر عضو از یک کلید و یک مقدار تشکیل می‌شود.</li>
+<li>نام کلید معنی داده را مشخص می‌کند. مقدار می‌تواند عدد، متن یا ساختار دیگری باشد.</li>
+</ul>
+<pre><code>student = {
+    &quot;name&quot;: &quot;Sara&quot;,
+    &quot;age&quot;: 20,
+    &quot;active&quot;: True,
+}
+print(student[&quot;name&quot;])  # Sara</code></pre>
+<p>آکولاد ابتدا و انتها، دونقطه میان کلید و مقدار، و ویرگول میان اعضا را روی کد مشخص کنید. نام کلید و مقدار متنی هر دو داخل کوتیشن‌اند.</p>
+<h3>انتخاب کلید</h3><ul>
+<li>برای شروع، از کلیدهای متنی یا عددی روشن و ثابت استفاده کنید.</li>
+<li>کلید تکراری عضو تازه نمی‌سازد و مقدار قبلی را جایگزین می‌کند.</li>
+</ul>
+<pre><code>settings = {&quot;theme&quot;: &quot;light&quot;, &quot;theme&quot;: &quot;dark&quot;}
+print(settings)  # {&#x27;theme&#x27;: &#x27;dark&#x27;}
+print(len(settings))  # 1</code></pre>
+<p>کلیدها باید hashable باشند. در سطح این دوره، رشته و عدد انتخاب‌های ساده‌اند. List و Dictionary کلید معتبر نیستند. مقادیر می‌توانند تکراری باشند. حساسیت حروف در name و Name را یادآوری کنید.</p>
+<h3>دسترسی امن به داده</h3><ul>
+<li>براکت برای کلیدی است که از وجود آن مطمئن هستیم.</li>
+<li>get برای کلید احتمالی، مقدار پیش‌فرض برمی‌گرداند.</li>
+</ul>
+<pre><code>student = {&quot;name&quot;: &quot;Sara&quot;}
+print(student[&quot;name&quot;])
+print(student.get(&quot;city&quot;, &quot;Unknown&quot;))
+print(&quot;city&quot; in student)  # False</code></pre>
+<p>student[&quot;city&quot;] در این مثال KeyError می‌دهد. اگر پیش‌فرض get را ننویسیم و کلید موجود نباشد، None برمی‌گردد. وجود کلید را با in بررسی می‌کنیم، چون None ممکن است خودش مقدار یک کلید باشد.</p>
+<h3>تغییر و افزودن عضو</h3><ul>
+<li>انتساب به کلید موجود، مقدار را تغییر می‌دهد.</li>
+<li>انتساب به کلید جدید، عضو اضافه می‌کند. update چند مورد را اعمال می‌کند.</li>
+</ul>
+<pre><code>student = {&quot;name&quot;: &quot;Sara&quot;, &quot;age&quot;: 20}
+student[&quot;age&quot;] = 21
+student[&quot;city&quot;] = &quot;Tehran&quot;
+student.update({&quot;age&quot;: 22, &quot;active&quot;: True})
+print(student[&quot;age&quot;])  # 22</code></pre>
+<p>update دیکشنری اصلی را تغییر می‌دهد و None برمی‌گرداند. نتیجهٔ آن را دوباره به student نسبت ندهید. از هنرجو بپرسید کدام خط عضو جدید ساخته است.</p>
+<h3>حذف عضو</h3><ul>
+<li>pop عضو را حذف می‌کند و مقدار آن را برمی‌گرداند.</li>
+<li>del کلید را حذف می‌کند. clear همهٔ اعضا را خالی می‌کند.</li>
+</ul>
+<pre><code>student = {&quot;name&quot;: &quot;Sara&quot;, &quot;city&quot;: &quot;Tehran&quot;}
+city = student.pop(&quot;city&quot;)
+print(city)  # Tehran
+print(student.pop(&quot;phone&quot;, &quot;Not found&quot;))
+del student[&quot;name&quot;]
+student.clear()
+print(student)  # {}</code></pre>
+<p>del روی کلید غایب و pop بدون مقدار پیش‌فرض، KeyError می‌دهند. clear خود متغیر را حذف نمی‌کند. popitem آخرین عضو اضافه‌شده را حذف می‌کند اما برای تمرین اصلی به آن نیاز نداریم.</p>
+<h2 id="section-5">5. مثال مبحث اول</h2>
+<h3>مثال اول: پروندهٔ دانشجو</h3><ul>
+<li>نام و سن ثبت شده‌اند. شهر را اضافه می‌کنیم و وضعیت دانشجو را می‌خوانیم.</li>
+</ul>
+<pre><code>student = {&quot;name&quot;: &quot;Sara&quot;, &quot;age&quot;: 20}
+student[&quot;city&quot;] = &quot;Tehran&quot;
+student[&quot;age&quot;] += 1
+print(student[&quot;name&quot;], student[&quot;age&quot;])
+print(student.get(&quot;active&quot;, False))</code></pre>
+<p>پیش از اجرا خروجی را پیش‌بینی کنید. خط age از عملگر انتسابی جلسه چهارم استفاده می‌کند.</p>
+<details><summary>پاسخ و توضیح</summary><p>خروجی دو خط آخر: Sara 21 و سپس False. get کلید active را به دیکشنری اضافه نمی‌کند.</p></details>
+<h3>مثال اول: حذف اطلاعات اختیاری</h3><ul>
+<li>حذف اطلاعات اختیاری باید برای کلید غایب هم قابل پیش‌بینی باشد.</li>
+</ul>
+<pre><code>student = {&quot;name&quot;: &quot;Sara&quot;, &quot;city&quot;: &quot;Tehran&quot;}
+removed = student.pop(&quot;city&quot;, &quot;Unknown&quot;)
+print(removed)
+print(student.get(&quot;city&quot;, &quot;Unknown&quot;))
+print(len(student))</code></pre>
+<details><summary>پاسخ و توضیح</summary><p>Tehran، سپس Unknown و سپس 1. فقط name باقی می‌ماند.</p></details>
+<h2 id="section-6">6. آموزش مبحث دوم</h2>
+<h3>پیمایش کلیدها</h3><ul>
+<li>حلقهٔ مستقیم روی دیکشنری، کلیدها را به ترتیب درج می‌دهد.</li>
+<li>با هر کلید می‌توان مقدار همان عضو را خواند.</li>
+</ul>
+<pre><code>scores = {&quot;Python&quot;: 18, &quot;Math&quot;: 16}
+for subject in scores:
+    print(subject, scores[subject])</code></pre>
+<p>ترتیب درج در Python 3.7 به بعد تضمین شده است. این ویژگی به معنی دسترسی با اندیس صفر و یک نیست. scores[0] به دنبال کلید عددی صفر می‌گردد.</p>
+<h3>Keys، Values و Items</h3><ul>
+<li>keys کلیدها، values مقدارها و items زوج کلید و مقدار را در اختیار می‌گذارند.</li>
+<li>در حلقهٔ items، دو متغیر هر زوج را دریافت می‌کنند.</li>
+</ul>
+<pre><code>scores = {&quot;Python&quot;: 18, &quot;Math&quot;: 16}
+print(list(scores.keys()))
+print(list(scores.values()))
+for subject, score in scores.items():
+    print(subject, score)</code></pre>
+<p>خروجی این متدها نما است و تغییرات بعدی دیکشنری را منعکس می‌کند. list یک عکس لحظه‌ای از آن می‌سازد. بازکردن زوج‌ها به مبحث Unpacking جلسه قبل مرتبط است.</p>
+<h3>محاسبه روی مقدارها</h3><ul>
+<li>متغیر جمع را قبل از حلقه صفر می‌کنیم.</li>
+<li>پیش از محاسبهٔ میانگین، حالت دیکشنری خالی را بررسی می‌کنیم.</li>
+</ul>
+<pre><code>scores = {&quot;Python&quot;: 18, &quot;Math&quot;: 16}
+total = 0
+for score in scores.values():
+    total += score
+if len(scores) &gt; 0:
+    print(total / len(scores))  # 17.0</code></pre>
+<p>قرار دادن total = 0 داخل حلقه باعث از دست رفتن جمع قبلی می‌شود. همین الگوی جمع‌زدن در پروژهٔ جلسه دهم تکرار خواهد شد.</p>
+<h3>انتساب و کپی</h3><ul>
+<li>انتساب یک نام تازه برای همان دیکشنری می‌سازد.</li>
+<li>copy یک دیکشنری جدید در سطح اول ایجاد می‌کند.</li>
+</ul>
+<pre><code>stock = {&quot;pen&quot;: 10}
+alias = stock
+backup = stock.copy()
+alias[&quot;pen&quot;] = 8
+print(stock[&quot;pen&quot;])   # 8
+print(backup[&quot;pen&quot;])  # 10</code></pre>
+<p>این مثال مقادیر عددی ساده دارد. کپی سطحی را با مستقل بودن همهٔ ساختارهای داخلی اشتباه نگیرید.</p>
+<h3>محدودیت کپی سطحی</h3><ul>
+<li>اگر مقدار یک کلید، List باشد، copy همان List داخلی را به اشتراک می‌گذارد.</li>
+</ul>
+<pre><code>first = {&quot;skills&quot;: [&quot;Python&quot;]}
+second = first.copy()
+second[&quot;skills&quot;].append(&quot;HTML&quot;)
+print(first[&quot;skills&quot;])
+# [&#x27;Python&#x27;, &#x27;HTML&#x27;]</code></pre>
+<p>قرار نیست در این جلسه deepcopy یا ماژول تازه تدریس شود. هدف شناخت محدودیت copy است. برای رکوردهای پروژه، هر بار دیکشنری تازه با مقادیر متنی و عددی می‌سازیم.</p>
+<h3>چند رکورد در یک List</h3><ul>
+<li>هر Dictionary یک رکورد را توصیف می‌کند.</li>
+<li>List چند رکورد را کنار هم نگه می‌دارد.</li>
+</ul>
+<pre><code>expenses = [
+    {&quot;title&quot;: &quot;Book&quot;, &quot;amount&quot;: 200000},
+    {&quot;title&quot;: &quot;Bus&quot;, &quot;amount&quot;: 50000},
+]
+print(expenses[0][&quot;title&quot;])  # Book</code></pre>
+<p>براکت اول در expenses[0] یک عضو List را انتخاب می‌کند. براکت دوم کلید title را از همان Dictionary می‌خواند. این دو دسترسی را جداگانه روی تخته نشان دهید.</p>
+<h2 id="section-7">7. مثال مبحث دوم</h2>
+<h3>مثال دوم: جمع هزینه‌ها</h3><ul>
+<li>ابتدا هر رکورد را می‌خوانیم، سپس مقدار amount را به جمع اضافه می‌کنیم.</li>
+</ul>
+<pre><code>expenses = [
+    {&quot;title&quot;: &quot;Book&quot;, &quot;amount&quot;: 200000},
+    {&quot;title&quot;: &quot;Bus&quot;, &quot;amount&quot;: 50000},
+]
+total = 0
+for expense in expenses:
+    total += expense[&quot;amount&quot;]
+print(total)  # 250000</code></pre>
+<p>این مثال پل ورود به پروژهٔ پایانی است. هنرجو یک هزینهٔ تازه اضافه کند و پیش از اجرا جمع جدید را بگوید.</p>
+<h2 id="section-8">8. نکات مهم</h2>
+<h3>نکات مهم</h3><ul>
+<li>عضویت با in به کلیدها مربوط است. برای مقدارها از values استفاده می‌کنیم.</li>
+<li>دیکشنری ترتیب درج را نگه می‌دارد، ولی ساختاری مبتنی بر کلید است.</li>
+<li>در زمان پیمایش مستقیم، تعداد اعضای همان دیکشنری را تغییر نمی‌دهیم.</li>
+</ul>
+<p>تغییر مقدار یک کلید موجود با اضافه یا حذف کردن کلید متفاوت است. برای حذف چند کلید می‌توان ابتدا فهرست کلیدهای مورد نظر را ساخت و سپس حذف کرد.</p>
+<h2 id="section-9">9. خطاهای رایج</h2>
+<h3>خطاهای رایج: دسترسی و نوع داده</h3><ul>
+<li>KeyError: نام کلید اشتباه است یا کلید هنوز وجود ندارد.</li>
+<li>TypeError: استفاده از List به‌عنوان کلید، یا جمع‌کردن متن با عدد.</li>
+<li>کلیدهای name و Name متفاوت‌اند. نوع مقدارها را نیز بررسی کنید.</li>
+</ul>
+<p>نمونهٔ خطادار را به‌صورت گفت‌وگو بررسی کنید: student[&quot;Name&quot;] در پرونده‌ای با کلید name. سپس آن را اصلاح کنید. هدف تشخیص علت است، نه پنهان کردن همهٔ خطاها با get.</p>
+<h3>خطاهای رایج: تغییر و کپی</h3><ul>
+<li>قرار دادن نتیجهٔ update در متغیر اصلی، آن را به None تبدیل می‌کند.</li>
+<li>backup = original کپی نیست و تغییر از هر نام روی یک شیء اثر می‌گذارد.</li>
+<li>copy فقط سطح اول را جدا می‌کند؛ دادهٔ تو در تو نیاز به توجه دارد.</li>
+</ul>
+<h2 id="section-10">10. تمرین کلاسی</h2>
+<h3>تمرین کلاسی: موجودی فروشگاه</h3><ul>
+<li>موجودی اولیه: pen برابر ۱۰ و notebook برابر ۵.</li>
+<li>pen را ۸ کنید، book را با موجودی ۳ اضافه کنید و notebook را حذف کنید.</li>
+<li>موجودی pencil را امن بخوانید و نام و موجودی کالاهای باقی‌مانده را چاپ کنید.</li>
+</ul>
+<p>زمان پیشنهادی ۱۰ دقیقه. از practice_ep09.py شروع کنید. ابتدا هنرجو کد خودش را اجرا کند و سپس پاسخ پیشنهادی را ببیند.</p>
+<h3>تمرین کلاسی: معیار بررسی</h3><ul>
+<li>دیکشنری نهایی فقط pen با مقدار ۸ و book با مقدار ۳ دارد.</li>
+<li>برای pencil مقدار صفر نمایش داده می‌شود و برنامه خطا نمی‌دهد.</li>
+<li>جمع موجودی با حلقه محاسبه می‌شود و نتیجه ۱۱ است.</li>
+</ul>
+<p>پاسخ کامل در codes_ep09/solutions_ep09.py قرار دارد. حالت موجودی صفر و دیکشنری خالی را نیز در کلاس بررسی کنید.</p>
+<h2 id="section-11">11. کوییز کوتاه</h2>
+<h3>کوییز کوتاه</h3><ul>
+<li>۱. حلقهٔ مستقیم روی Dictionary چه چیزی را تحویل می‌دهد؟</li>
+<li>۲. برای کلید غایب، تفاوت براکت و get چیست؟</li>
+<li>۳. تفاوت انتساب و copy چیست؟ کپی سطحی چه محدودیتی دارد؟</li>
+</ul>
+<details><summary>پاسخ و توضیح</summary><p>۱. کلیدها. ۲. براکت KeyError می‌دهد؛ get پیش‌فرض یا None برمی‌گرداند. ۳. انتساب همان شیء را به اشتراک می‌گذارد؛ copy سطح اول را جدا می‌کند اما ساختار داخلی ممکن است مشترک باشد.</p></details>
+<h2 id="section-12">12. تمرین منزل</h2>
+<h3>تمرین منزل: دفتر نمره</h3><ul>
+<li>برای Python، Math و English به ترتیب نمره‌های ۱۸، ۱۶ و ۱۹ را ثبت کنید.</li>
+<li>میانگین را حساب کنید و درس‌های با نمرهٔ حداقل ۱۸ را نمایش دهید.</li>
+<li>در یک کپی، Math را ۲۰ کنید و ثابت کنید مقدار اصلی هنوز ۱۶ است.</li>
+</ul>
+<p>تحویل: فایل Python و توضیح کوتاه تفاوت انتساب و copy. شرط دیکشنری خالی و دسترسی امن به History را اضافه کنید. پاسخ در solutions_ep09.py است.</p>
+<h2 id="section-13">13. جمع‌بندی</h2>
+<h3>جمع‌بندی و اتصال به پروژه</h3><ul>
+<li>با کلید به داده دسترسی داریم و با متدها اعضا را مدیریت می‌کنیم.</li>
+<li>با items و values، داده‌ها را پیمایش و محاسبه می‌کنیم.</li>
+<li>در جلسهٔ بعد، Dictionary و List پایهٔ دفتر هزینهٔ شخصی خواهند بود.</li>
+</ul>
+<p>مرجع بررسی رفتار copy، get و نماهای دیکشنری: https://docs.python.org/3/library/stdtypes.html#mapping-types-dict</p>
+<h2>فایل‌های همراه</h2><ul>
+<li><a href="codes_ep09/dictionary_examples.py" dir="ltr">dictionary_examples.py</a></li>
+<li><a href="codes_ep09/practice_ep09.py" dir="ltr">practice_ep09.py</a></li>
+<li><a href="codes_ep09/solutions_ep09.py" dir="ltr">solutions_ep09.py</a></li>
+</ul><h2>منابع تکمیلی</h2><ul>
+<li><a dir="ltr" href="https://docs.python.org/3/library/stdtypes.html#mapping-types-dict">https://docs.python.org/3/library/stdtypes.html#mapping-types-dict</a></li>
+<li><a dir="ltr" href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">https://docs.python.org/3/tutorial/datastructures.html#dictionaries</a></li>
+</ul></html>

@@ -13,3 +13,9 @@
 *.[pP][pP][aA]
 *.[sS][lL][dD][xX]
 *.[sS][lL][dD][mM]
+
+# Local authoring and Python caches
+.course_completion/
+.codex-finalizer/
+__pycache__/
+*.py[cod]
